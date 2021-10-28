@@ -2,9 +2,9 @@
     <h3>MJV Class</h3>
     <!-- <h3 *ngIf="student">Olá, {{ student.name }}</h3> -->
     <ul>
-        <li routerLink="/students">Home</li>
-        <li routerLink="/login">Login</li>
-        <li routerLink="/create-student">Adicionar Estudante</li>
-        <li (click)="exit()">Sair</li>
+        <li routerLink="/students" *ngIf="student">Home</li>
+        <li routerLink="/login" *ngIf="!student">Login</li>
+        <li routerLink="/create-student" *ngIf="student">Adicionar Estudante</li>
+        <li (click)="exit()" *ngIf="student">Sair</li>
     </ul>
 </nav>

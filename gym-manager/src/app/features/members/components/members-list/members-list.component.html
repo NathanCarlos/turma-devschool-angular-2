@@ -1,2 +1,4 @@
 <h1>Lista de Membros da Academia</h1>
-<app-member *ngFor="let item of members" [member]="item"></app-member>
+<input type="text" placeholder="Digite um nome" (keyup)="searchByName($event)">
+<input type="number" placeholder="Digite um id" (keyup)="searchById($event)">
+<app-member *ngFor="let item of filteredMembers" [member]="item" [card]="true"></app-member>

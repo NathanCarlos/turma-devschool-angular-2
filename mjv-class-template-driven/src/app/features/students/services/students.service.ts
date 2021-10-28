@@ -63,7 +63,7 @@ export class StudentsService {
     return this.students;
   }
 
-  getStudentByEmailAndPassword(email: string, password: string) {
+  getStudentByEmailAndPassword(email: string | undefined, password: string | undefined) {
     return this.students.find((student) => student.email === email && student.password === password);
   }
 

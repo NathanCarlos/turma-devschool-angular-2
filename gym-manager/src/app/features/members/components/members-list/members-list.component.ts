@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../../models/member.model';
+import { MembersService } from '../../services/members.service';
 
 @Component({
   selector: 'app-members-list',
@@ -8,31 +9,30 @@ import { Member } from '../../models/member.model';
 })
 export class MembersListComponent implements OnInit {
 
-  members: Array<Member> = [
-    {
-      id: 1,
-      nome: 'Nathan Carlos',
-      valorMensalidade: 100,
-      dataUltimoPgto: '2021-07-23',
-      dataInclusaoSistema: '2021-07-01'
-    },
-    { id: 2,
-      nome: 'Palloma',
-      valorMensalidade: 250,
-      dataUltimoPgto: '2021-10-23',
-      dataInclusaoSistema: '2021-07-01'
-    },
-    { id: 3,
-      nome: 'Alan Jhonnes',
-      valorMensalidade: 350,
-      dataUltimoPgto: '2021-08-23',
-      dataInclusaoSistema: '2021-07-01'
-    }
-  ];
+  members: Array<Member> = [];
 
-  constructor() { }
+  filteredMembers: Array<Member> = [];
+
+  constructor(private membersService: MembersService) { }
 
   ngOnInit(): void {
+    this.members = this.membersService.getMembers();
+    this.filteredMembers = this.members;
+  }
+
+  searchById(event: any) {
+    const value = event.target.value;
+    const filteredMembers = this.members.filter((member) => member.id == value);
+    if(filteredMembers.length === 0) {
+      return this.filteredMembers = this.members;
+    }
+    return this.filteredMembers = filteredMembers;
+  }
+
+  searchByName(event: any) {
+    const value = event.target.value;
+    const filteredMembers = this.members.filter((member) => member.nome.toUpperCase().search(value.toUpperCase()) > -1);
+    this.filteredMembers = filteredMembers;
   }
 
 }

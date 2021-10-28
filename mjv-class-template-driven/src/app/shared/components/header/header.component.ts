@@ -14,8 +14,10 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    // const studentStorage = sessionStorage.getItem('student');
-    // if(studentStorage) this.student = JSON.parse(studentStorage);
+    const studentStorage = sessionStorage.getItem('student');
+    if(studentStorage) {
+      this.student = JSON.parse(studentStorage);
+    }
   }
 
   navigateByUrl(url: string) {
@@ -23,7 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   exit() {
-    // sessionStorage.clear();
+    sessionStorage.clear();
     this.navigateByUrl('/login');
   }
 

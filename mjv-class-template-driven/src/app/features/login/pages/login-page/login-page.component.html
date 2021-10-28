@@ -3,15 +3,17 @@
         <h3>Bem vindo! Digite seu usuário/senha para acessar o sistema!</h3>
         <form class="login-form">
             <div class="form-field">
-                <input type="email" placeholder="Digite o Email" name="email" required>
+                <input type="email" [(ngModel)]="email" placeholder="Digite o Email" name="email" required>
             </div>
             <div class="form-field">
-                <input type="password" placeholder="Digite a senha" name="password" required>
+                <input type="password" [(ngModel)]="password" placeholder="Digite a senha" name="password" required>
             </div>
             <p class="error" *ngIf="error">Usuário/senha inválidos, tente novamente!</p>
         </form>
         <button
             class="primary-button"
-            type="button">Entrar</button>
+            type="button"
+            [disabled]="!email || !password"
+            (click)="authenticate()">Entrar</button>
     </div>
 <app-footer></app-footer>

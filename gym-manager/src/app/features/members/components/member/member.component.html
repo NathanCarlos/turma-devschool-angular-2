@@ -1,5 +1,14 @@
-<div class="card">
+<div class="card" *ngIf="card">
     <h2>Nome: {{member?.nome}}</h2>
     <h2>Mensalidade: {{member?.valorMensalidade | currency: 'BRL'}}</h2>
     <h2>Data último pagamento: {{member?.dataUltimoPgto | date}}</h2>
+    <button (click)="memberDetails()">Detalhes do Membro</button>
+</div>
+
+<div *ngIf="!card">
+    <h1>Detalhes do Membro:</h1>
+    <h3>Nome: {{member?.nome}}</h3>
+    <h3>Mensalidade: {{member?.valorMensalidade | currency: 'BRL'}}</h3>
+    <h3>Data último pagamento: {{member?.dataUltimoPgto | date}}</h3>
+    <h3>Data de inclusão: {{member?.dataInclusaoSistema | date}}</h3>
 </div>

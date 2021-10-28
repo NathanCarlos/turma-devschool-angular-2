@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Member } from '../../models/member.model';
 
 @Component({
@@ -9,11 +10,18 @@ import { Member } from '../../models/member.model';
 export class MemberComponent implements OnInit {
 
   @Input()
+  card?: Boolean;
+
+  @Input()
   member?: Member;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  memberDetails() {
+    this.router.navigateByUrl(`member-details/${this.member?.id}`);
   }
 
 }

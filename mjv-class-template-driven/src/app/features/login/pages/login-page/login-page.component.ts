@@ -11,11 +11,25 @@ export class LoginPageComponent implements OnInit {
 
   error: boolean = false;
 
+  email?: string;
+  password?: string;
+
   constructor(
     private studentService: StudentsService,
     private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  authenticate() {
+    const student = this.studentService.getStudentByEmailAndPassword(this.email, this.password);
+    if (!student) {
+      this.error = true;
+    } else {
+      sessionStorage.setItem('student', JSON.stringify(student));
+      this.router.navigateByUrl('students');
+    }
+
   }
 
   validateUser(loginForm: NgForm) {
