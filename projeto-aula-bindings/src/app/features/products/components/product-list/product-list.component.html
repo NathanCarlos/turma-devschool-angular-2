@@ -1,0 +1,13 @@
+<h3>{{title}}</h3>
+
+<div (mouseenter)="updateColor()" [style]="styles">
+    <h1>Busca por nome</h1>
+    <input class="input-busca" type="text" (keyup)="searchFilter($event)">
+</div>
+
+<div class="products-container">
+    <app-product-card
+    *ngFor="let item of filteredProducts"
+    [product]="item"></app-product-card>
+</div>
+

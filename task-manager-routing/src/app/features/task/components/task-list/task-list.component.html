@@ -1,0 +1,12 @@
+<div>
+    <h1>Busca por Descrição</h1>
+    <input type="text" class="input-busca" (keyup)="searchTask($event)">
+</div>
+
+<div *ngFor="let item of filteredTasks">
+    <app-task [task]="item"></app-task>
+</div>
+
+<div *ngIf="filteredTasks.length === 0">
+    <h1>Não existe tarefas para essa busca!</h1>
+</div>

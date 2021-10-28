@@ -1,0 +1,10 @@
+ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+    li {
+        cursor: pointer;
+    }
+}

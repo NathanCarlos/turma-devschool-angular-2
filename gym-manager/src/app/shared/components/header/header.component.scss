@@ -1,0 +1,12 @@
+nav {
+    ul {
+        display: flex;
+        list-style: none;
+        justify-content: space-evenly;
+        width: 100%;
+        li {
+            cursor: pointer;
+        }
+    }
+    margin: 50px;
+}

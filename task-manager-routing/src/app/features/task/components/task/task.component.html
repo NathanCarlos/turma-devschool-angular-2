@@ -1,0 +1,7 @@
+<h2>{{ task?.description }}</h2>
+<h2 [ngClass]="{'completed': task?.completed, 'not-completed': !task?.completed}"
+    (click)="updateStatus()">
+    Status:
+    <span class="pointer">{{ task?.completed ? 'Feito' : 'Pendente' }}</span>
+</h2>
+<h3>Data de Inclusão: {{ task?.inclusionDate | date: 'longDate' }}</h3>
