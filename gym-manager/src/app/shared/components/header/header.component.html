@@ -1,7 +1,8 @@
 <nav>
     <ul>
-        <li [routerLink]="['/members']">Lista de Membros</li>
-        <li [routerLink]="['/login']">Login</li>
-        <li [routerLink]="['/register']">Cadastro</li>
+        <li [routerLink]="['/members']" *ngIf="member">Lista de Membros</li>
+        <li [routerLink]="['/login']" *ngIf="!member">Login</li>
+        <li [routerLink]="['/register']" *ngIf="!member">Cadastro</li>
+        <li (click)="exit()" *ngIf="member">Sair</li>
     </ul>
 </nav>
