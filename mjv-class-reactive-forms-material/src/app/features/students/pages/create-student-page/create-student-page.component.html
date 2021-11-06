@@ -1,43 +1,45 @@
 <app-header></app-header>
 <div class="register-container">
     <h3>Cadastro de Estudantes</h3>
-    <form #studentForm="ngForm" class="register-form" (submit)="onSubmit(studentForm)">
+    <form [formGroup]="studentForm" class="register-form" (submit)="onSubmit()">
         <div class="form-field">
             <label class="label-input">Nome do Estudante:</label>
-            <input type="text" ngModel placeholder="Digite o nome" name="name" required>
+            <input type="text" formControlName="name" placeholder="Digite o nome">
         </div>
         <div class="form-field">
             <label class="label-input">Email:</label>
-            <input type="email" placeholder="Digite o Email"
-            name="email" ngModel required>
+            <input type="email" formControlName="email" placeholder="Digite o Email"
+            >
+            <span class="error"
+            *ngIf="studentForm.controls.email.errors">
+            Email inválido</span>
         </div>
         <div class="form-field">
             <label class="label-input">Senha do estudante:</label>
-            <input type="password" placeholder="Digite a senha"
-            name="password" ngModel required>
-            <span class="error">
+            <input type="password" formControlName="password" placeholder="Digite a senha">
+            <span class="error" *ngIf="studentForm.controls.password.errors
+            && studentForm.value.password.length > 0">
             A senha deve ter no mínimo 6 caracteres</span>
         </div>
         <div class="form-field">
             <label class="label-input">Valor da mensalidade:</label>
-            <input type="number" placeholder="Digite o valor da mensalidade"
-            name="monthlyPayment" ngModel required>
-            <span class="error">
+            <input type="number" formControlName="monthlyPayment" placeholder="Digite o valor da mensalidade">
+            <span class="error"
+            *ngIf="studentForm.controls.monthlyPayment.errors
+            && studentForm.value.monthlyPayment > 0">
             O valor da mensalidade deve estar entre 100 e 1500*</span>
         </div>
         <div class="form-field">
             <label class="label-input">Data de inclusão:</label>
-            <input type="text"
-            name="inclusionDate" [(ngModel)]="student.inclusionDate" disabled>
+            <input type="text" formControlName="inclusionDate">
         </div>
         <div class="form-field">
             <label class="label-input">Último pagamento mensal:</label>
-            <input type="text"
-            name="lastMontlyPayment" [(ngModel)]="student.lastMontlyPayment" disabled>
+            <input type="text" formControlName="lastMontlyPayment">
         </div>
         <div class="form-field">
             <label class="label-input">Curso</label>
-            <select name="course" ngModel required>
+            <select formControlName="course">
                 <option value="Angular MJV">Angular MJV</option>
                 <option value="Java MJV">Java MJV</option>
                 <option value="Node MJV">Node MJV</option>

@@ -1,0 +1,26 @@
+<app-header></app-header>
+<form #memberForm="ngForm" (submit)="createMember(memberForm)">
+    <div class="form-field">
+        <label>Nome:</label>
+        <input type="text" name="nome" ngModel required>
+    </div>
+    <div class="form-field">
+        <label>Email:</label>
+        <input type="email" name="email" ngModel required>
+    </div>
+    <div class="form-field">
+        <label>Senha:</label>
+        <input type="password" name="senha" ngModel required>
+    </div>
+    <div class="form-field">
+        <label>Valor mensalidade:</label>
+        <input type="number" name="valorMensalidade" ngModel required>
+    </div>
+    <div class="form-field">
+        <label>Data de inclusão:</label>
+        <input type="text" name="dataInclusao" [(ngModel)]="member.dataInclusaoSistema" required>
+    </div>
+    <button 
+    type="submit"
+    [disabled]="memberForm.invalid">Enviar</button>
+</form>

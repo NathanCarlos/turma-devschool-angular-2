@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Member } from '../models/member.model';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class MembersService {
       valorMensalidade: 350,
       dataUltimoPgto: '2021-08-23',
       dataInclusaoSistema: '2021-07-01'
-    }
+    },
   ];
 
   constructor() { }
@@ -48,5 +49,25 @@ export class MembersService {
 
   getMemberByEmailAndPassword(email: string, senha: string) {
     return this.members.find((member) => member.email === email && member.senha === senha);
+  }
+
+  getDefaultMember(): Member {
+    return {
+      id: this.getNextId(),
+      nome: '',
+      email: '',
+      senha: '',
+      valorMensalidade: 0,
+      dataUltimoPgto: moment().format('DD/MM/YYYY'),
+      dataInclusaoSistema: moment().format('DD/MM/YYYY')
+    }
+  }
+
+  getNextId() {
+    return (this.members[(this.members.length - 1)].id + 1);
+  }
+
+  createMember(member: Member) {
+    this.members.push(member);
   }
 }

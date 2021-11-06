@@ -1,0 +1,17 @@
+form {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    flex-wrap: wrap;
+    .form-field {
+        flex: 1;
+    }
+    input {
+        height: 25px;
+        font-size: 16px;
+    }
+    button {
+        width: 100px;
+        height: 25px;
+    }
+}
