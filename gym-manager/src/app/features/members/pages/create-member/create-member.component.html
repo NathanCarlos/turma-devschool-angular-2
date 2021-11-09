@@ -1,24 +1,28 @@
 <app-header></app-header>
-<form #memberForm="ngForm" (submit)="createMember(memberForm)">
+<form [formGroup]="memberForm" (submit)="createMember()">
     <div class="form-field">
         <label>Nome:</label>
-        <input type="text" name="nome" ngModel required>
+        <input type="text" formControlName="nome">
     </div>
     <div class="form-field">
         <label>Email:</label>
-        <input type="email" name="email" ngModel required>
+        <input type="email" formControlName="email">
+        <span *ngIf="memberForm.controls.email.errors">Campo de e-mail é inválido!</span>
     </div>
     <div class="form-field">
         <label>Senha:</label>
-        <input type="password" name="senha" ngModel required>
+        <input type="password" formControlName="senha">
+        <span *ngIf="memberForm.value.senha.length > 0 &&
+            memberForm.controls.senha.errors">Digite no mínimo 6 caracteres</span>
     </div>
     <div class="form-field">
         <label>Valor mensalidade:</label>
-        <input type="number" name="valorMensalidade" ngModel required>
+        <input type="number" formControlName="valorMensalidade">
+        <span *ngIf="memberForm.controls.valorMensalidade.errors">O valor máximo de mensalidade é R$1000</span>
     </div>
     <div class="form-field">
         <label>Data de inclusão:</label>
-        <input type="text" name="dataInclusao" [(ngModel)]="member.dataInclusaoSistema" required>
+        <input type="text" formControlName="dataInclusao">
     </div>
     <button 
     type="submit"

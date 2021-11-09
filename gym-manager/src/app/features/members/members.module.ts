@@ -6,7 +6,7 @@ import { MembersPageComponent } from './pages/members-page/members-page.componen
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MemberDetailsComponent } from './pages/member-details/member-details.component';
 import { CreateMemberComponent } from './pages/create-member/create-member.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +21,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule
+    ReactiveFormsModule
   ]
 })
 export class MembersModule { }
