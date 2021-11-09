@@ -4,7 +4,15 @@
     <p>Mensalidade: {{ student.monthlyPayment | currency: 'BRL' }}</p>
     <p>Data entrada: {{ student.inclusionDate | date }}</p>
     <div class="actions">
-        <a [routerLink]="['/student-details', student.id]">Detalhes</a>
+        <!-- <a [routerLink]="['/student-details', student.id]">Detalhes</a> -->
+        <button mat-raised-button color="primary" [routerLink]="['/student-details', student.id]">
+            Detalhes
+        </button>
+        <mat-divider [vertical]="true"></mat-divider>
+        <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon"
+        (click)="removeStudent()">
+            <mat-icon>delete</mat-icon>
+        </button>
     </div>
 </div>
 
@@ -16,4 +24,7 @@
     <p>Data do último pagamento: {{ student.lastMontlyPayment| date }}</p>
     <p>Matrícula válida? <b>{{ student.validRegistration ? 'Sim' : 'Não' }}</b></p>
     <p>Curso atual: <b>{{ student.course }}</b></p>
+    <button mat-icon-button [routerLink]="['/students']">
+        <mat-icon>keyboard_arrow_left</mat-icon>Voltar
+    </button>
 </div>

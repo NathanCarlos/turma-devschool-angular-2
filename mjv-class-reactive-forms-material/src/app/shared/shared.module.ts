@@ -5,10 +5,29 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { RedDirective } from './directives/red.directive';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.component';
+
+const materialModules = [
+  MatButtonModule,
+  MatIconModule,
+  MatDividerModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDialogModule
+];
 
 const components = [
   HeaderComponent,
-  FooterComponent
+  FooterComponent,
+  MessageDialogComponent
 ];
 
 const pipes = [CpfPipe];
@@ -19,16 +38,18 @@ const directives = [RedDirective];
   declarations: [
     ...components,
     ...pipes,
-    ...directives
+    ...directives,
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ...materialModules,
   ],
   exports: [
     ...components,
     ...pipes,
-    ...directives
+    ...directives,
+    ...materialModules,
   ]
 })
 export class SharedModule { }

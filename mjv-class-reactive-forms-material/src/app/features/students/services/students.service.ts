@@ -92,6 +92,13 @@ export class StudentsService {
     return this.students;
   }
 
+  removeStudent(id: number) {
+    const studentIndexFinded = this.students.findIndex((student) => student.id === id);
+    if(studentIndexFinded) {
+      this.students.splice(studentIndexFinded, 1);
+    }
+  }
+
   generateNextId(): number {
     return this.students[(this.students.length - 1)].id + 1;
   }

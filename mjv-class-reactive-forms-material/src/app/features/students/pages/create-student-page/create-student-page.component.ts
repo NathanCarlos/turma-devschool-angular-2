@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MessageDialogComponent } from 'src/app/shared/dialogs/message-dialog/message-dialog.component';
 import { Student } from '../../models/student.model';
 import { StudentsService } from '../../services/students.service';
 
@@ -33,7 +35,8 @@ export class CreateStudentPageComponent implements OnInit {
 
   constructor(
     private studentsService: StudentsService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.studentForm.controls.inclusionDate.disable();
@@ -48,7 +51,11 @@ export class CreateStudentPageComponent implements OnInit {
     this.student.monthlyPayment = formValue.monthlyPayment;
     this.student.course = formValue.course;
     this.studentsService.createStudent(this.student);
-    alert('Aluno adicionado com sucesso!');
+    this.dialog.open(MessageDialogComponent, {
+      data: {
+        mensagem: 'Estudante Adicionado com Sucesso!'
+      }
+    });
     this.router.navigateByUrl('/students');
   }
 

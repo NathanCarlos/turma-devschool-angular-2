@@ -20,6 +20,8 @@
         background-color: $cor-padrao-cinza-claro-2;
         color: $cor-padrao-textos;
         padding: 10px;
+        display: flex;
+        justify-content: space-between;
         a {
             text-decoration: none;
             color: $cor-padrao-sucesso;

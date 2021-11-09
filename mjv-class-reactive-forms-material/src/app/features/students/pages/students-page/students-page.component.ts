@@ -8,6 +8,8 @@ import { StudentsService } from '../../services/students.service';
 })
 export class StudentsPageComponent implements OnInit {
 
+  value: string = "";
+
   students: Array<Student> = [];
 
   filteredStudents: Array<Student> = [];

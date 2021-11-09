@@ -9,6 +9,8 @@ import { LoginModule } from './features/login/login.module';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 registerLocaleData(localePt); 
 
 @NgModule({
@@ -19,13 +21,17 @@ registerLocaleData(localePt);
     BrowserModule,
     AppRoutingModule,
     StudentsModule,
-    LoginModule
+    LoginModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
-    }
+    },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'pt-BR'},
   ],
   bootstrap: [AppComponent]
 })
