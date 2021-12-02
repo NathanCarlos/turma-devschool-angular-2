@@ -1,54 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../models/student.model';
 import * as moment from 'moment';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ResponseMessage } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
 
-  students: Array<Student> = [
-    {
-      id: 1,
-      name: 'Nathan Carlos',
-      email: 'nathan@gmail.com',
-      password: '123456',
-      monthlyPayment: 500,
-      inclusionDate: '2021-07-24',
-      lastMontlyPayment: '2021-07-24',
-      validRegistration: true,
-      course: 'Devschool MJV Angular'
-    },
-    {
-      id: 2,
-      name: 'Henrique Silva',
-      email: 'henrique@gmail.com',
-      password: '123456',
-      monthlyPayment: 400,
-      inclusionDate: '2021-01-24',
-      lastMontlyPayment: '2021-06-24',
-      validRegistration: true,
-      course: 'Devschool MJV Angular'
-    },
-    {
-      id: 3,
-      name: 'Alan Jhonnes',
-      email: 'alan@gmail.com',
-      password: '123456',
-      monthlyPayment: 450,
-      inclusionDate: '2021-06-24',
-      lastMontlyPayment: '2021-06-24',
-      validRegistration: true,
-      course: 'Devschool MJV Angular'
-    }
-  ];
+  students: Array<Student> = [];
+  urlBackEnd = environment.urlBackEnd;
+  headers = {
+    'Content-type': 'application/json'
+  };
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getDefaultStudent(): Student {
     const dateToday = moment().format('YYYY/MM/DD');
     return {
-      id: this.generateNextId(),
       name: '',
       email: '',
       password: '',
@@ -59,16 +31,21 @@ export class StudentsService {
       course: ''
     }
   }
+
   getStudents() {
-    return this.students;
+    return this.httpClient.get<Array<Student>>(`${this.urlBackEnd}/students`, { headers: this.headers });
   }
 
   getStudentByEmailAndPassword(email: string | undefined, password: string | undefined) {
-    return this.students.find((student) => student.email === email && student.password === password);
+    const body = {
+      email,
+      password
+    };
+    return this.httpClient.post<Student>(`${this.urlBackEnd}/students/authenticate`, body, { headers: this.headers });
   }
 
   getStudentById(id: number) {
-    return this.students.find((student) => student.id === Number(id));
+    return this.httpClient.get<Student>(`${this.urlBackEnd}/students/id/${id}`, { headers: this.headers });
   }
 
   getStudentByName(name: string) {
@@ -88,18 +65,11 @@ export class StudentsService {
   }
 
   createStudent(student: Student) {
-    this.students.push(student);
-    return this.students;
+    return this.httpClient.post<Student>(`${this.urlBackEnd}/students/create`, student, { headers: this.headers });
   }
 
-  removeStudent(id: number) {
-    const studentIndexFinded = this.students.findIndex((student) => student.id === id);
-    if(studentIndexFinded) {
-      this.students.splice(studentIndexFinded, 1);
-    }
+  removeStudent(id: number | undefined) {
+    return this.httpClient.delete<ResponseMessage>(`${this.urlBackEnd}/students/remove/${id}`, { headers: this.headers });
   }
 
-  generateNextId(): number {
-    return this.students[(this.students.length - 1)].id + 1;
-  }
 }

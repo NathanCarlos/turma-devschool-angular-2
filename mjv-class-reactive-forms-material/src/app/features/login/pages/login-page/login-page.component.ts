@@ -22,14 +22,14 @@ export class LoginPageComponent implements OnInit {
   }
 
   authenticate() {
-    const student = this.studentService.getStudentByEmailAndPassword(this.email, this.password);
-    if (!student) {
-      this.error = true;
-    } else {
+    this.studentService.getStudentByEmailAndPassword(this.email, this.password)
+    .subscribe((student) => {
       sessionStorage.setItem('student', JSON.stringify(student));
       this.router.navigateByUrl('students');
-    }
-
+    }, (err) => {
+      console.log(err);
+      this.error = true;
+    });
   }
 
   validateUser(loginForm: NgForm) {

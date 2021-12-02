@@ -8,6 +8,7 @@ import { StudentDetailsPageComponent } from './pages/student-details-page/studen
 import { RouterModule } from '@angular/router';
 import { CreateStudentPageComponent } from './pages/create-student-page/create-student-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class StudentsModule { }

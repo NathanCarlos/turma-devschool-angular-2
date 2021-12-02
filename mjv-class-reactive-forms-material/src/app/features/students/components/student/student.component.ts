@@ -25,12 +25,24 @@ export class StudentComponent implements OnInit {
   }
 
   removeStudent() {
-    if(this.student) this.studentsService.removeStudent(this.student.id);
-    this.dialog.open(MessageDialogComponent, {
-      data: {
-        mensagem: 'Estudante Excluído com Sucesso!'
-      }
-    });
+    
+    if(this.student) {
+      this.studentsService.removeStudent(this.student.id)
+      .subscribe((result) => {
+        this.dialog.open(MessageDialogComponent, {
+          data: {
+            mensagem: result.message
+          }
+        });
+      }, (err) => {
+        this.dialog.open(MessageDialogComponent, {
+          data: {
+            mensagem: err.message
+          }
+        });
+      })
+    }
+
   }
 
 }
